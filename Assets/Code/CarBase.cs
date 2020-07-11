@@ -28,7 +28,7 @@ public class CarBase
 		if( Physics.Raycast( new Ray( transform.position,Vector3.down ),out hit ) &&
 			hit.transform.name == "Grass" )
 		{
-			var pos = checkpoints[curCheckpoint].transform.position;
+			var pos = checkpoints[curCheckpoint - 1].transform.position;
 			pos.y = 0.0f;
 			transform.position = pos;
 		}
@@ -102,6 +102,7 @@ public class CarBase
 			}
 
 			Destroy( GetComponent<BoxCollider>() );
+			body.velocity = Vector3.zero;
 			// Destroy( this );
 			enabled = false;
 		}
@@ -121,13 +122,13 @@ public class CarBase
 	float curBounceForce = bounceForce;
 	[SerializeField] Sprite thumbnail = null;
 
-	protected Vector3 vel = Vector3.zero;
+	[HideInInspector] public Vector3 vel = Vector3.zero;
 	// bool canBounce = true;
 	// const float bounceReset = 0.7f;
 
 	List<GameObject> checkpoints = new List<GameObject>();
-	int curCheckpoint = 0;
-	protected int lap = 0;
+	[HideInInspector] public int curCheckpoint = 0;
+	[HideInInspector] public int lap = 0;
 
 	const float maxSpeed = 40.0f;
 	protected const int lapsToComplete = 1;

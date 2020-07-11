@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AITeal
+public class AIPurple
 	:
 	CarBase
 {
@@ -29,22 +29,21 @@ public class AITeal
 	{
 		yield return ( new WaitForSeconds( delay ) );
 
-		float dist = 999999.0f;
+		int checkpoint = -1;
 		for( int i = 0; i < targets.Length; ++i )
 		{
-			float newDist = ( targets[i].transform.position -
-				transform.position ).sqrMagnitude;
-			if( newDist < dist && targets[i] != this )
+			var newCheckpoint = targets[i].lap * 10 + targets[i].curCheckpoint;
+			if( newCheckpoint > checkpoint && targets[i] != this )
 			{
 				target = targets[i].transform;
-				dist = newDist;
+				checkpoint = newCheckpoint;
 			}
 		}
 
 		StartCoroutine( SetTarget( targetReset ) );
 	}
 
-	[SerializeField] float targetReset = 6.0f;
+	[SerializeField] float targetReset = 4.0f;
 
 	Transform target = null;
 	CarBase[] targets;
