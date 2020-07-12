@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2472010342964784865}
   - component: {fileID: 1317184209695918645}
   - component: {fileID: 2472010342964784893}
+  - component: {fileID: 679141028616138598}
   m_Layer: 0
   m_Name: Player
   m_TagString: Car
@@ -80,8 +81,19 @@ MonoBehaviour:
   accel: 0.6
   decay: 0.98
   thumbnail: {fileID: 21300000, guid: 73799044075692149ae10dde4b138174, type: 3}
+  vel: {x: 0, y: 0, z: 0}
+  curCheckpoint: 0
+  lap: 0
   lagginess: 1
   turnSpeed: 4
+--- !u!81 &679141028616138598
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472010342964784890}
+  m_Enabled: 1
 --- !u!1 &2472010343921095808
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2472010343921095813}
   - component: {fileID: 2472010343921095810}
-  - component: {fileID: 2472010343921095811}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -157,14 +168,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2472010343921095811
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472010343921095808}
-  m_Enabled: 1
 --- !u!1 &3494662029607078031
 GameObject:
   m_ObjectHideFlags: 0

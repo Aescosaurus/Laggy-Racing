@@ -18,6 +18,13 @@ public class CarBase
 		{
 			checkpoints.Add( checkpointHolder.GetChild( i ).gameObject );
 		}
+
+		audSrc = gameObject.AddComponent<AudioSource>();
+		audSrc.spatialBlend = 1.0f;
+		
+		screechSound = Resources.Load<AudioClip>( "Sounds/Screech" );
+		lapSound = Resources.Load<AudioClip>( "Sounds/Lap" );
+		crashSounds.Add( Resources.Load<AudioClip>( "Sounds/Crash1" ) );
 	}
 
     // Update is called once per frame
@@ -34,6 +41,14 @@ public class CarBase
 			transform.position = pos;
 		}
 
+		var velDiscrepency = ( transform.forward - vel ).sqrMagnitude;
+		if( audSrc.isPlaying ) velDiscrepency /= 1.5f;
+		// if( velDiscrepency > 600.0f && Random.Range( 0,100 ) < 8 )
+		if( Random.Range( 600.0f,2500.0f ) < velDiscrepency )
+		{
+			audSrc.PlayOneShot( screechSound );
+		}
+
 		vel *= decay;
 
 		if( curBounceForce < 0.05f ) curBounceForce = 0.05f;
@@ -45,6 +60,10 @@ public class CarBase
 		if( coll.gameObject.tag == "Wall" ||
 			coll.gameObject.tag == "Car" )
 		{
+			audSrc.pitch = 1.0f + Random.Range( -pitchRange,pitchRange );
+			audSrc.PlayOneShot( crashSounds[Random.Range( 0,crashSounds.Count )] );
+			if( Random.Range( 0.0f,100.0f ) < 50.0f ) audSrc.PlayOneShot( screechSound );
+
 			// if( canBounce )
 			{
 				var normal = coll.contacts[0].normal;
@@ -78,6 +97,7 @@ public class CarBase
 			{
 				curCheckpoint = 1;
 				++lap;
+				audSrc.PlayOneShot( lapSound );
 				CompleteLap();
 			}
 		}
@@ -128,6 +148,10 @@ public class CarBase
 	// }
 
 	protected Rigidbody body;
+	AudioSource audSrc;
+	List<AudioClip> crashSounds = new List<AudioClip>();
+	AudioClip screechSound;
+	AudioClip lapSound;
 
 	[SerializeField] protected float accel = 3.0f;
 	[SerializeField] float decay = 0.98f;
@@ -145,4 +169,5 @@ public class CarBase
 
 	const float maxSpeed = 40.0f;
 	protected const int lapsToComplete = 3;
+	const float pitchRange = 0.26f;
 }
