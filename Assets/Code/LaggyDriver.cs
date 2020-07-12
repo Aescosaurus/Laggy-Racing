@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LaggyDriver
 	:
@@ -29,6 +30,11 @@ public class LaggyDriver
 		StartCoroutine( ApplyVel( Input.GetAxis( "Accelerate" ) * accel,lagginess ) );
 
 		StartCoroutine( ApplyDir( Input.GetAxis( "Turn" ) * accel,lagginess ) );
+
+		if( Input.GetAxis( "Cancel" ) > 0.0f )
+		{
+			SceneManager.LoadScene( "Menu" );
+		}
 	}
 
 	IEnumerator ApplyVel( float vel,float lag )
