@@ -9,7 +9,6 @@ public class AIPurple
 	void Start()
 	{
 		targets = FindObjectsOfType<CarBase>();
-		target = FindObjectOfType<LaggyDriver>().transform;
 		StartCoroutine( SetTarget( targetReset ) );
 	}
 
@@ -27,8 +26,6 @@ public class AIPurple
 
 	IEnumerator SetTarget( float delay )
 	{
-		yield return ( new WaitForSeconds( delay ) );
-
 		int checkpoint = -1;
 		for( int i = 0; i < targets.Length; ++i )
 		{
@@ -40,6 +37,7 @@ public class AIPurple
 			}
 		}
 
+		yield return ( new WaitForSeconds( delay ) );
 		StartCoroutine( SetTarget( targetReset ) );
 	}
 

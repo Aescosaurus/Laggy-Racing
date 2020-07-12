@@ -20,6 +20,8 @@ public class LaggyDriver
 			child.GetComponentInChildren<Text>().text = "";
 			child.GetComponentInChildren<Image>().color = invis;
 		}
+
+		StartCoroutine( LapFlash( lapFlashInterval ) );
 	}
 
 	void Update()
@@ -53,8 +55,9 @@ public class LaggyDriver
 		if( lap >= lapsToComplete )
 		{
 			lapText.text = "";
-			GameObject.Find( "Canvas" ).transform.Find( "ScorePanel" )
-				.gameObject.SetActive( true );
+			var canv = GameObject.Find( "Canvas" ).transform;
+			canv.Find( "ScorePanel" ).gameObject.SetActive( true );
+			canv.Find( "BackButton" ).gameObject.SetActive( true );
 		}
 	}
 

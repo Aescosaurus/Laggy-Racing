@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CarBase
 	:
@@ -25,7 +26,7 @@ public class CarBase
 		body.MovePosition( transform.position + vel * Time.deltaTime );
 
 		RaycastHit hit;
-		if( Physics.Raycast( new Ray( transform.position,Vector3.down ),out hit ) &&
+		if( !Physics.Raycast( new Ray( transform.position,Vector3.down ),out hit ) ||
 			hit.transform.name == "Grass" )
 		{
 			var pos = checkpoints[curCheckpoint - 1].transform.position;
@@ -75,7 +76,7 @@ public class CarBase
 		{
 			if( coll.gameObject == checkpoints[0] )
 			{
-				curCheckpoint = 0;
+				curCheckpoint = 1;
 				++lap;
 				CompleteLap();
 			}
@@ -84,7 +85,8 @@ public class CarBase
 
 	protected virtual void CompleteLap()
 	{
-		if( lap >= lapsToComplete )
+		if( lap >= lapsToComplete &&
+			SceneManager.GetActiveScene().name != "Menu" )
 		{
 			var scorePanel = GameObject.Find( "Canvas" )
 				.transform.Find( "ScorePanel" );
@@ -92,11 +94,22 @@ public class CarBase
 			{
 				var child = scorePanel.GetChild( i );
 				var childImg = child.GetComponentInChildren<Image>();
+				int place = i + 1;
 				if( childImg.sprite == null )
 				{
-					child.GetComponentInChildren<Text>().text = gameObject.name;
+					child.GetComponentInChildren<Text>().text =
+						place.ToString() + ". " + gameObject.name;
 					childImg.color = Color.white;
 					childImg.sprite = thumbnail;
+
+					var levelName = SceneManager.GetActiveScene().name;
+					if( name == "Player" &&
+						place < PlayerPrefs.GetInt( levelName,11 ) )
+					{
+						PlayerPrefs.SetInt( levelName,place );
+						PlayerPrefs.Save();
+					}
+
 					break;
 				}
 			}
@@ -131,5 +144,5 @@ public class CarBase
 	[HideInInspector] public int lap = 0;
 
 	const float maxSpeed = 40.0f;
-	protected const int lapsToComplete = 1;
+	protected const int lapsToComplete = 1; // 3
 }

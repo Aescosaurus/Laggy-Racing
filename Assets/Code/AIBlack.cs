@@ -22,6 +22,7 @@ public class AIBlack
 		diff.y = 0.0f;
 		if( diff.sqrMagnitude < Mathf.Pow( targetActivateDist,2 ) )
 		{
+			tries = 0;
 			if( Random.Range( 0.0f,100.0f ) < retargetChance )
 			{
 				++curTarget;
@@ -41,6 +42,20 @@ public class AIBlack
 		}
 	}
 
+	public override void OnCollisionEnter( Collision coll )
+	{
+		base.OnCollisionEnter( coll );
+
+		if( coll.gameObject.tag == "Wall" )
+		{
+			if( ++tries > maxTries )
+			{
+				tries = 0;
+				FindTarget( curTarget );
+			}
+		}
+	}
+
 	void FindTarget( int i )
 	{
 		var bounds = ground.GetChild( i ).GetComponent<BoxCollider>().bounds;
@@ -53,6 +68,8 @@ public class AIBlack
 
 	List<Vector3> targets = new List<Vector3>();
 	int curTarget = 1;
+	int tries = 0;
+	int maxTries = 4;
 
 	Transform ground;
 

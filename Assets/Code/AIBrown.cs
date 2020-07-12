@@ -9,6 +9,10 @@ public class AIBrown
 	void Start()
 	{
 		target = FindObjectOfType<LaggyDriver>();
+		if( target == null )
+		{
+			target = FindObjectOfType<AIMint>();
+		}
 		StartCoroutine( AISwap( aiSwapTime ) );
 	}
 
@@ -53,5 +57,5 @@ public class AIBrown
 	[SerializeField] float aiSwapTime = 5.0f;
 
 	bool aiTargetMode = false;
-	LaggyDriver target;
+	CarBase target;
 }

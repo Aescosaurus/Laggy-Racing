@@ -9,7 +9,6 @@ public class AITeal
 	void Start()
 	{
 		targets = FindObjectsOfType<CarBase>();
-		target = FindObjectOfType<LaggyDriver>().transform;
 		StartCoroutine( SetTarget( targetReset ) );
 	}
 
@@ -27,8 +26,6 @@ public class AITeal
 
 	IEnumerator SetTarget( float delay )
 	{
-		yield return ( new WaitForSeconds( delay ) );
-
 		float dist = 999999.0f;
 		for( int i = 0; i < targets.Length; ++i )
 		{
@@ -40,6 +37,8 @@ public class AITeal
 				dist = newDist;
 			}
 		}
+
+		yield return ( new WaitForSeconds( delay ) );
 
 		StartCoroutine( SetTarget( targetReset ) );
 	}

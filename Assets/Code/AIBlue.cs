@@ -9,6 +9,10 @@ public class AIBlue
 	void Start()
 	{
 		target = FindObjectOfType<LaggyDriver>();
+		if( target == null )
+		{
+			target = FindObjectOfType<AIOrange>();
+		}
 	}
 
 	void Update()
@@ -25,7 +29,7 @@ public class AIBlue
 		}
 	}
 
-	LaggyDriver target;
+	CarBase target;
 
 	[SerializeField] float predictAmount = 10.0f;
 }
