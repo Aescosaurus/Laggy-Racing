@@ -90,9 +90,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e2327ca6c16d34287d57593585c595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accel: 16
+  accel: 18
   decay: 0.98
   thumbnail: {fileID: 21300000, guid: 8bd4597dfc5914a448a76b9aa455e959, type: 3}
+  vel: {x: 0, y: 0, z: 0}
+  curCheckpoint: 0
+  lap: 0
   rotSpeed: 5
 --- !u!1 &3896726040745682524
 GameObject:

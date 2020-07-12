@@ -76,13 +76,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fed768da6a72c4590573ea91201735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accel: 18
+  accel: 21
   decay: 0.98
   thumbnail: {fileID: 21300000, guid: 28cc5497a6c32e44ca22188fd6f4fdc6, type: 3}
   vel: {x: 0, y: 0, z: 0}
   curCheckpoint: 0
   lap: 0
-  predictAmount: 8
+  predictAmount: 11
 --- !u!1 &3076827509968898205
 GameObject:
   m_ObjectHideFlags: 0

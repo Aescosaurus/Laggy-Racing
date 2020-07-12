@@ -144,5 +144,5 @@ public class CarBase
 	[HideInInspector] public int lap = 0;
 
 	const float maxSpeed = 40.0f;
-	protected const int lapsToComplete = 1; // 3
+	protected const int lapsToComplete = 3;
 }

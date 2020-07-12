@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Deserted.unity
     guid: fd2512e07c85aac49bb0479b94aab39d
+  - enabled: 1
+    path: Assets/Scenes/Shipwreck.unity
+    guid: 9363be33c5f8b1e40b9582503c25ba43
   m_configObjects: {}

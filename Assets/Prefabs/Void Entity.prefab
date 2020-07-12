@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62960b69a617cd84d882733361ba0795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accel: 19
+  accel: 21
   decay: 0.98
   thumbnail: {fileID: 21300000, guid: ed942844c5196b549a99a2e2565e7aeb, type: 3}
   vel: {x: 0, y: 0, z: 0}
